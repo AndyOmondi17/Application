@@ -9,13 +9,13 @@ public class Splashscreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splash_screen);
+        setContentView(R.layout.splashscreen);
         Thread myThread = new Thread(){
             @Override
             public void run() {
                 try {
                     sleep(3000);
-                    Intent intent = new Intent(getApplicationContext(),Login.class);
+                    Intent intent = new Intent(getApplicationContext(),Log_In.class);
                     startActivity(intent);
                     finish();
                 } catch (InterruptedException e) {
