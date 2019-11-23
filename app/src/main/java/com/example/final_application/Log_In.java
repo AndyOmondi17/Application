@@ -21,7 +21,7 @@ public class Log_In extends AppCompatActivity  implements View.OnClickListener {
     @BindView(R.id.registerTextView) TextView mSignUpPage;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.log_in);
         ButterKnife.bind(this);
