@@ -34,21 +34,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     @Override
     public boolean onNavigationItemSelected(@Nullable MenuItem item){
-        switch (item.getItemId()) {
-            case R.id.nav_schedule:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new CalendarView()).commit();
-
-                break;
-            case R.id.nav_home:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new createEvent()).commit();
-                break;
-
-            case R.id.nav_announcement:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ViewEvent()).commit();
-                break;
+//        switch (item.getItemId()) {
+//            case R.id.nav_schedule:
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+//                        new CalendarView()).commit();
+//
+//                break;
+//            case R.id.nav_home:
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+//                        new createEvent()).commit();
+//                break;
+//
+//            case R.id.nav_announcement:
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+//                        new ViewEvent()).commit();
+//                break;
 //            case R.id.message:
 //                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
 //                        new NotificationsFragment()).commit();
@@ -57,8 +57,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
 //                        new NotificationsFragment()).commit();
 //                break;
-        }
-        drawer.closeDrawer(GravityCompat.START);
+//        }
+//        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
