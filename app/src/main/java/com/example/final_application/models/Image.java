@@ -1,5 +1,5 @@
 
-package com.example.final_application;
+package com.example.final_application.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

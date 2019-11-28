@@ -2,4 +2,7 @@
     <string name="app_name">Usafi App</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="title_place_holder">Game 1</string>
+    <string name="no_games">No games found</string>
 </resources>
