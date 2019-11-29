@@ -40,6 +40,7 @@ public class Log_In extends AppCompatActivity  implements View.OnClickListener {
         }else if (v == mSignUpPage){
             Intent intent = new Intent(this,Sign_Up.class);
             startActivity(intent);
+            finish();
         }else{
             Toast.makeText(Log_In.this, "kindly click a button", Toast.LENGTH_LONG);
         }
