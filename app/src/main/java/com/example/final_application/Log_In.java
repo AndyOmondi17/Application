@@ -37,11 +37,13 @@ public class Log_In extends AppCompatActivity  implements View.OnClickListener {
             Toast.makeText(Log_In.this, "welcome "+userName , Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this,MainActivity.class);
             startActivity(intent);
-        }else if (v == mSignUpPage){
+        }
+        else if (v == mSignUpPage){
             Intent intent = new Intent(this,Sign_Up.class);
             startActivity(intent);
             finish();
-        }else{
+        }
+        else{
             Toast.makeText(Log_In.this, "kindly click a button", Toast.LENGTH_LONG);
         }
 
