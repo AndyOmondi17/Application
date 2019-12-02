@@ -1,5 +1,5 @@
 package com.example.final_application;
-
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.final_application.adapters.RvAdapter;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private RequestQueue requestQueue ;
     private List<Anime> lstAnime = new ArrayList<>();
     private RecyclerView myrv ;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
 
     @Override
@@ -67,6 +70,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         myrv = findViewById(R.id.recyclerView);
         jsonrequest();
+
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    getSupportActionBar().setTitle("Welcome, " + user.getDisplayName() + "!");
+                } else {
+
+                }
+            }
+        };
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -123,7 +139,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void setRvadapter (List<Anime> lst) {
-
         RvAdapter myAdapter = new RvAdapter(this,lst) ;
         myrv.setLayoutManager(new LinearLayoutManager(this));
         myrv.setAdapter(myAdapter);
@@ -208,11 +223,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
         switch (id){
             case R.id.action_logout:
-               FirebaseAuth.getInstance().signOut();
-               Intent intent = new Intent(this,Log_In.class);
-               intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-               startActivity(intent);
-               finish();
+              logout();
                break;
             case R.id.nav_home:
 //                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -250,6 +261,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null){
+            mAuth.removeAuthStateListener(mAuthListener);
         }
     }
 
