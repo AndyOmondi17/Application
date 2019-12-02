@@ -226,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                        new NotificationsFragment()).commit();
 //                break;
 //        }
-//        drawer.closeDrawer(GravityCompat.START);
+        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
