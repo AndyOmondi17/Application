@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -66,8 +68,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         myrv = findViewById(R.id.recyclerView);
         jsonrequest();
 
-//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-//        navigationView.setNavigationItemSelectedListener(this);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
     }
     public void jsonrequest() {
 
@@ -202,17 +204,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //    }
 
     @Override
-    public boolean onNavigationItemSelected(@Nullable MenuItem item){
-        switch (item.getItemId()) {
+    public boolean onNavigationItemSelected(MenuItem item){
+        int id = item.getItemId();
+        switch (id){
             case R.id.action_logout:
-               logout();
-//
-//
-//                break;
-//            case R.id.nav_home:
+               FirebaseAuth.getInstance().signOut();
+               Intent intent = new Intent(this,Log_In.class);
+               intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+               startActivity(intent);
+               finish();
+               break;
+            case R.id.nav_home:
 //                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
 //                        new createEvent()).commit();
-//                break;
+                break;
 //
 //            case R.id.nav_announcement:
 //                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -233,6 +238,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void logout(){
         FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(MainActivity.this,Log_In.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 
     @Override
