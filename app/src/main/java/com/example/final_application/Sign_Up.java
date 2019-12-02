@@ -57,7 +57,6 @@ public class Sign_Up extends AppCompatActivity implements View.OnClickListener{
         mAuthProgressDialog.setTitle("Loading....");
         mAuthProgressDialog.setMessage("Authenticating with firebase");
         mAuthProgressDialog.setCancelable(false);
-        mAuthProgressDialog.dismiss();
 
     }
 
@@ -89,27 +88,27 @@ public class Sign_Up extends AppCompatActivity implements View.OnClickListener{
             }
 
         });
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-
+//        mAuth.createUserWithEmailAndPassword(email, password)
+//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+//
 //                     mAuthProgressDialog.dismiss();
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Log.d(TAG, "Authentication successful");
-                        } else {
-                            Toast.makeText(Sign_Up.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        if (task.isSuccessful()) {
+//                            Log.d(TAG, "Authentication successful");
+//                        } else {
+//                            Toast.makeText(Sign_Up.this, "Authentication failed.",
+//                                    Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
 
     }
 
     private void createAuthStateListener(){
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth){
                 final FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     Intent intent = new Intent(Sign_Up.this, MainActivity.class);
@@ -117,9 +116,6 @@ public class Sign_Up extends AppCompatActivity implements View.OnClickListener{
                     startActivity(intent);
                     finish();
                 }
-
-
-
             }
         };
 
@@ -178,7 +174,7 @@ public class Sign_Up extends AppCompatActivity implements View.OnClickListener{
     }
 
     @Override
-    public void onStop() {
+    public void onStop(){
         super.onStop();
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
