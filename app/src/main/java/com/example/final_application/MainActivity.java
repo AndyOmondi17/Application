@@ -22,6 +22,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.final_application.adapters.RvAdapter;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -202,10 +203,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@Nullable MenuItem item){
-//        switch (item.getItemId()) {
-//            case R.id.nav_schedule:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-//                        new CalendarView()).commit();
+        switch (item.getItemId()) {
+            case R.id.action_logout:
+               logout();
+//
 //
 //                break;
 //            case R.id.nav_home:
@@ -225,9 +226,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
 //                        new NotificationsFragment()).commit();
 //                break;
-//        }
+        }
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void logout(){
+        FirebaseAuth.getInstance().signOut();
     }
 
     @Override
