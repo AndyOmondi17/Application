@@ -52,7 +52,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.MyViewHolder> {
         holder.tvname.setText(mData.get(position).getName());
         holder.tv_rate.setText(mData.get(position).getRating());
         holder.tvstudio.setText(mData.get(position).getStudio());
-        holder.tvdescription.setText(mData.get(position).getDescription());
+//        holder.tvdescription.setText(mData.get(position).getDescription());
         holder.tvcat.setText(mData.get(position).getCategorie());
 
         // load image from the internet using Glide
@@ -77,7 +77,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.MyViewHolder> {
             tvstudio = itemView.findViewById(R.id.studio);
             tv_rate = itemView.findViewById(R.id.rating);
             tvcat = itemView.findViewById(R.id.categorie);
-            tvdescription =itemView.findViewById(R.id.desc);
+//            tvdescription =itemView.findViewById(R.id.desc);
             AnimeThumbnail = itemView.findViewById(R.id.thumbnail);
         }
     }

@@ -88,20 +88,21 @@ public class Sign_Up extends AppCompatActivity implements View.OnClickListener{
             }
 
         });
-//        mAuth.createUserWithEmailAndPassword(email, password)
-//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//
-//                     mAuthProgressDialog.dismiss();
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if (task.isSuccessful()) {
-//                            Log.d(TAG, "Authentication successful");
-//                        } else {
-//                            Toast.makeText(Sign_Up.this, "Authentication failed.",
-//                                    Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+
+
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        mAuthProgressDialog.dismiss();
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "Authentication successful");
+                        } else {
+                            Toast.makeText(Sign_Up.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
     }
 

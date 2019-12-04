@@ -9,14 +9,16 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -26,17 +28,22 @@ import com.example.final_application.adapters.RvAdapter;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
-
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+
+    //    @BindView(R.id.btn1) Button mbtn1;
+//    @BindView(R.id.desc) TextView mdesc;
+//    @BindView(R.id.categorie) TextView mcategorie;
+//    @BindView(R.id.rating) TextView mrating;
+//    @BindView(R.id.studio) TextView mstudio;
+
     private DrawerLayout drawer;
     private final String JSON_URL="https://gist.githubusercontent.com/aws1994/f583d54e5af8e56173492d3f60dd5ebf/raw/c7796ba51d5a0d37fc756cf0fd14e54434c547bc/anime.json";
 //    private JsonArrayRequest request;
@@ -44,24 +51,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //    private List<Games> franchise1;
 //    private List<Anime> lstAnime = new ArrayList<>();
 //    private RecyclerView recyclerView;
-    private JsonArrayRequest ArrayRequest ;
-    private RequestQueue requestQueue ;
+    private JsonArrayRequest ArrayRequest;
+    private RequestQueue requestQueue;
     private List<Anime> lstAnime = new ArrayList<>();
     private RecyclerView myrv ;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+//        ButterKnife.bind(this);
+//        ButterKnife.bind(this);
 
 
+//        mbtn1 = findViewById(R.id.btn1);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ButterKnife.bind(this);
+
 
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -70,6 +83,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         myrv = findViewById(R.id.recyclerView);
         jsonrequest();
+//        setHasOptionsMenu(true);
+
+
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -88,8 +104,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
     }
     public void jsonrequest() {
-
-
         ArrayRequest = new JsonArrayRequest(JSON_URL, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -143,6 +157,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         myrv.setLayoutManager(new LinearLayoutManager(this));
         myrv.setAdapter(myAdapter);
     }
+
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
@@ -225,7 +240,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.action_logout:
               logout();
                break;
-            case R.id.nav_home:
+            case R.id.nav_announcement:
+                Intent i = new Intent(MainActivity.this,announcement.class);
+                startActivity(i);
 //                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
 //                        new createEvent()).commit();
                 break;
@@ -278,5 +295,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+//    @Override
+//    public void onClick(View v) {
+//        if (v == mbtn1) {
+//            mdesc.setVisibility(mdesc.VISIBLE);
+//            mcategorie.setVisibility(mcategorie.INVISIBLE);
+//            mrating.setVisibility(mrating.INVISIBLE);
+//            mstudio.setVisibility(mstudio.INVISIBLE);
+//            mbtn1.setVisibility(mbtn1.INVISIBLE);
 
-}
+//            String userName = mEmailEditText.getText().toString();
+//            Toast.makeText(Log_In.this, "welcome "+userName , Toast.LENGTH_LONG).show();
+//            Intent intent = new Intent(this,MainActivity.class);
+//            startActivity(intent);
+        }
+//    }
+//}
